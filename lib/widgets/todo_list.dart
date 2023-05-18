@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 
 /// todoリストウェジェット
 class todoList extends StatelessWidget {
-  const todoList({Key? key}) : super(key: key);
+  final dynamic showDeleteDialog;
+  final dynamic showEditDialog;
+
+  const todoList(
+      {Key? key, required this.showDeleteDialog, required this.showEditDialog})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +17,20 @@ class todoList extends StatelessWidget {
               child: ListTile(
                 title: Text('タイトル'),
                 subtitle: Text('説明'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {},
-                ),
+                trailing: Wrap(children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      showEditDialog();
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      showDeleteDialog();
+                    },
+                  ),
+                ]),
               ),
             ));
   }

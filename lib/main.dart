@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app_flutter/screens/LaunchScreen.dart';
-import 'package:todo_app_flutter/util/Common.dart';
+import 'package:todo_app_flutter/screens/launch_screen.dart';
+import 'package:todo_app_flutter/util/common.dart';
 
 void main() {
   runApp(const MyApp());
