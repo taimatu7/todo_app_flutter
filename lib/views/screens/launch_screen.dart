@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app_flutter/util/common.dart';
-import 'package:todo_app_flutter/widgets/dialogs/dialog_delete.dart';
-import 'package:todo_app_flutter/widgets/dialogs/dialog_edit.dart';
-import 'package:todo_app_flutter/widgets/todo_list.dart';
+import 'package:todo_app_flutter/views/widgets/dialogs/dialog_delete.dart';
+import 'package:todo_app_flutter/views/widgets/dialogs/dialog_edit.dart';
+import 'package:todo_app_flutter/views/widgets/todo_list.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({Key? key}) : super(key: key);
