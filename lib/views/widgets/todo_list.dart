@@ -25,7 +25,7 @@ class todoList extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
-                      showEditDialog();
+                      showEditDialog(todo: launchScreenState.todos[index]);
                     },
                   ),
                   IconButton(

@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_flutter/models/todo.dart';
 
 class DialogEdit extends StatefulWidget {
-  final Function onPressed;
   final BuildContext context;
-  const DialogEdit({Key? key, required this.context, required this.onPressed})
+  final Todo? todo;
+  const DialogEdit({Key? key, required this.context, required this.todo})
       : super(key: key);
 
   @override
-  State<DialogEdit> createState() => DialogEditState(onPressed: onPressed);
+  State<DialogEdit> createState() => DialogEditState(todo: todo);
 }
 
 class DialogEditState extends State<DialogEdit> {
-  final Function onPressed;
+  final Todo? todo;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
 
   DialogEditState({
     Key? key,
-    required this.onPressed,
+    required this.todo,
   });
+
+  @override
+  void initState() {
+    super.initState();
+    if (todo != null) {
+      _titleController.text = todo!.title;
+      _contentController.text = todo!.description;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +54,16 @@ class DialogEditState extends State<DialogEdit> {
               decoration: const InputDecoration(labelText: '説明'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: () async {}, child: const Text('保存')),
+            ElevatedButton(
+              child: const Text('保存'),
+              onPressed: () async {
+                final todoEditied = Todo(
+                  title: _titleController.text,
+                  description: _contentController.text,
+                );
+                Navigator.pop(context, todoEditied);
+              },
+            ),
           ],
         ),
       ),
