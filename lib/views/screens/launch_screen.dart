@@ -1,42 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app_flutter/util/common.dart';
+import 'package:todo_app_flutter/view_models/launch_screen_notifier.dart';
 import 'package:todo_app_flutter/views/widgets/dialogs/dialog_delete.dart';
 import 'package:todo_app_flutter/views/widgets/dialogs/dialog_edit.dart';
 import 'package:todo_app_flutter/views/widgets/todo_list.dart';
 
-class LaunchScreen extends StatefulWidget {
-  const LaunchScreen({Key? key}) : super(key: key);
+class LaunchScreen extends ConsumerWidget {
+  const LaunchScreen({super.key});
 
   @override
-  State<LaunchScreen> createState() => _LaunchScreenState();
-}
-
-class _LaunchScreenState extends State<LaunchScreen> {
-  bool _isLoading = true;
-
-  showDeleteDialog() {
-    showDialog(
-      context: context,
-      builder: (_) => DialogDelete(context: context, onPressed: () {}),
-    );
-  }
-
-  showEditDialog() {
-    showModalBottomSheet(
-        isScrollControlled: true,
+  Widget build(BuildContext context, WidgetRef ref) {
+    showDeleteDialog() {
+      showDialog(
         context: context,
-        elevation: 5,
-        builder: (_) => DialogEdit(context: context, onPressed: () {}));
-  }
+        builder: (_) => DialogDelete(context: context, onPressed: () {}),
+      );
+    }
 
-  @override
-  Widget build(BuildContext context) {
+    showEditDialog() {
+      showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          elevation: 5,
+          builder: (_) => DialogEdit(context: context, onPressed: () {}));
+    }
+
+    final launchScreenState = ref.watch(launchScreenProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('TODOリスト'),
         backgroundColor: Common.themeColor,
       ),
-      body: !_isLoading
+      body: launchScreenState.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
