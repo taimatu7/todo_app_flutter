@@ -14,11 +14,24 @@ class todoList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final launchScreenState = ref.watch(launchScreenProvider);
+    final LaunchScreenNotifier launchScreenNotifier =
+        ref.watch(launchScreenProvider.notifier);
 
     return ListView.builder(
         itemCount: launchScreenState.todos.length,
         itemBuilder: (context, index) => Card(
               child: ListTile(
+                tileColor: launchScreenState.todos[index].isCompleted == 1
+                    ? Colors.grey[300]
+                    : Colors.blue[50],
+                leading: Checkbox(
+                    value: launchScreenState.todos[index].isCompleted == 1,
+                    onChanged: (bool? value) async {
+                      final todo = launchScreenState.todos[index]
+                          .copyWith(isCompleted: value! ? 1 : 0);
+                      await launchScreenNotifier.addOrUpdateTodo(todo);
+                      await launchScreenNotifier.fetchTodos();
+                    }),
                 title: Text(launchScreenState.todos[index].title),
                 subtitle: Text(launchScreenState.todos[index].description),
                 trailing: Wrap(children: [
