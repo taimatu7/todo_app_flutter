@@ -5,7 +5,7 @@ class AppDatabase {
   late Database _db;
 
   Future<Database> init() async {
-    String path = join(await getDatabasesPath(), 'todo.db');
+    String path = join(await getDatabasesPath(), 'todos.db');
 
     return await openDatabase(path, version: 1, onCreate: (db, version) async {
       await createTables(db);
