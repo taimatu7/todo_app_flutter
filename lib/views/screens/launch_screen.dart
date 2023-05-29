@@ -8,18 +8,23 @@ import 'package:todo_app_flutter/views/widgets/dialogs/dialog_edit.dart';
 import 'package:todo_app_flutter/views/widgets/todo_list.dart';
 
 class LaunchScreen extends ConsumerWidget {
-  const LaunchScreen({super.key});
+  const LaunchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final launchScreenState = ref.watch(launchScreenProvider);
     final launchScreenNotifier = ref.watch(launchScreenProvider.notifier);
 
-    showDeleteDialog() {
+    showDeleteDialog({required Todo todo}) {
       showDialog(
         context: context,
-        builder: (_) => DialogDelete(context: context, onPressed: () {}),
-      );
+        builder: (_) => DialogDelete(context: context),
+      ).then((value) async {
+        if (value) {
+          await launchScreenNotifier.deleteTodoById(todo.id);
+          await launchScreenNotifier.fetchTodos();
+        }
+      });
     }
 
     showEditDialog({Todo? todo}) {
@@ -28,10 +33,11 @@ class LaunchScreen extends ConsumerWidget {
               context: context,
               elevation: 5,
               builder: (_) => DialogEdit(context: context, todo: todo))
-          .then((value) {
+          .then((value) async {
         if (value != null) {
           // nullではない場合は追加または更新する
-          launchScreenNotifier.addOrUpdateTodo(value);
+          await launchScreenNotifier.addOrUpdateTodo(value);
+          await launchScreenNotifier.fetchTodos();
         }
       });
     }

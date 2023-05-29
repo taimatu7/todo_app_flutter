@@ -31,7 +31,7 @@ class todoList extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () {
-                      showDeleteDialog();
+                      showDeleteDialog(todo: launchScreenState.todos[index]);
                     },
                   ),
                 ]),

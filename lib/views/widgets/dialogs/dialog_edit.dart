@@ -13,6 +13,7 @@ class DialogEdit extends StatefulWidget {
 
 class DialogEditState extends State<DialogEdit> {
   final Todo? todo;
+  int? id;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
 
@@ -25,6 +26,7 @@ class DialogEditState extends State<DialogEdit> {
   void initState() {
     super.initState();
     if (todo != null) {
+      id = todo!.id;
       _titleController.text = todo!.title;
       _contentController.text = todo!.description;
     }
@@ -58,6 +60,7 @@ class DialogEditState extends State<DialogEdit> {
               child: const Text('保存'),
               onPressed: () async {
                 final todoEditied = Todo(
+                  id: id,
                   title: _titleController.text,
                   description: _contentController.text,
                 );

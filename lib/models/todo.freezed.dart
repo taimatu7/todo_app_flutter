@@ -14,14 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Todo _$TodoFromJson(Map<String, dynamic> json) {
+  return _Todo.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Todo {
   int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  bool get isCompleted => throw _privateConstructorUsedError;
+  int get isCompleted => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TodoCopyWith<Todo> get copyWith => throw _privateConstructorUsedError;
 }
@@ -35,7 +40,7 @@ abstract class $TodoCopyWith<$Res> {
       {int? id,
       String title,
       String description,
-      bool isCompleted,
+      int isCompleted,
       DateTime? createdAt});
 }
 
@@ -74,7 +79,7 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -93,7 +98,7 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       {int? id,
       String title,
       String description,
-      bool isCompleted,
+      int isCompleted,
       DateTime? createdAt});
 }
 
@@ -128,7 +133,7 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -138,14 +143,16 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Todo implements _Todo {
   const _$_Todo(
       {this.id,
       required this.title,
       required this.description,
-      this.isCompleted = false,
+      this.isCompleted = 0,
       this.createdAt});
+
+  factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
   @override
   final int? id;
@@ -155,7 +162,7 @@ class _$_Todo implements _Todo {
   final String description;
   @override
   @JsonKey()
-  final bool isCompleted;
+  final int isCompleted;
   @override
   final DateTime? createdAt;
 
@@ -179,6 +186,7 @@ class _$_Todo implements _Todo {
                 other.createdAt == createdAt));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, title, description, isCompleted, createdAt);
@@ -188,6 +196,13 @@ class _$_Todo implements _Todo {
   @pragma('vm:prefer-inline')
   _$$_TodoCopyWith<_$_Todo> get copyWith =>
       __$$_TodoCopyWithImpl<_$_Todo>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TodoToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Todo implements Todo {
@@ -195,8 +210,10 @@ abstract class _Todo implements Todo {
       {final int? id,
       required final String title,
       required final String description,
-      final bool isCompleted,
+      final int isCompleted,
       final DateTime? createdAt}) = _$_Todo;
+
+  factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
   int? get id;
@@ -205,7 +222,7 @@ abstract class _Todo implements Todo {
   @override
   String get description;
   @override
-  bool get isCompleted;
+  int get isCompleted;
   @override
   DateTime? get createdAt;
   @override
