@@ -56,16 +56,19 @@ class DialogEditState extends State<DialogEdit> {
               decoration: const InputDecoration(labelText: '説明'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              child: const Text('保存'),
-              onPressed: () async {
-                final todoEditied = Todo(
-                  id: id,
-                  title: _titleController.text,
-                  description: _contentController.text,
-                );
-                Navigator.pop(context, todoEditied);
-              },
+            Align(
+              alignment: Alignment.topRight,
+              child: ElevatedButton(
+                child: const Text('保存'),
+                onPressed: () async {
+                  final todoEditied = Todo(
+                    id: id,
+                    title: _titleController.text,
+                    description: _contentController.text,
+                  );
+                  Navigator.pop(context, todoEditied);
+                },
+              ),
             ),
           ],
         ),
