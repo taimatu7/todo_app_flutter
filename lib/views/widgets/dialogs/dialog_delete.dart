@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
 class DialogDelete extends StatefulWidget {
-  final Function onPressed;
   final BuildContext context;
-  const DialogDelete({Key? key, required this.context, required this.onPressed})
-      : super(key: key);
+  const DialogDelete({Key? key, required this.context}) : super(key: key);
 
   @override
-  State<DialogDelete> createState() => DialogDeleteState(onPressed: onPressed);
+  State<DialogDelete> createState() => DialogDeleteState();
 }
 
 class DialogDeleteState extends State<DialogDelete> {
-  final Function onPressed;
-
   DialogDeleteState({
     Key? key,
-    required this.onPressed,
   });
 
   @override
@@ -25,13 +20,13 @@ class DialogDeleteState extends State<DialogDelete> {
       children: [
         SimpleDialogOption(
           onPressed: () {
-            onPressed();
+            Navigator.pop(context, true);
           },
           child: const Text('削除'),
         ),
         SimpleDialogOption(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, false);
           },
           child: const Text('キャンセル'),
         ),
